@@ -1,6 +1,6 @@
 import * as React from "react";
 import { } from '@material-ui/core';
-import Layout from "src/components/layout";
+import Layout from "src/components/Layout";
 
 const Index = ({ allPostsData }: any) => {
   return (
