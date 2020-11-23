@@ -32,3 +32,11 @@ export const callLogin = async (user: User): Promise<LoginResponse> => {
 
     return data.json();
 }
+
+export const callMeRequest = async (): Promise<User | null> => {
+    const data = await fetch(serverURL + '/api/user/me');
+    if (data.status === 401) {
+        return null;
+    }
+    return data.json();
+}
