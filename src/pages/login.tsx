@@ -20,7 +20,7 @@ const Login = () => {
             return;
         }
         console.log(user);
-        router.push('/home');
+        // router.push('/home');
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
