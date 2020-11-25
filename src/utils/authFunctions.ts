@@ -1,5 +1,5 @@
-import { serverURL } from "src/constants";
-import { LoginResponse, RegisterResponse, User } from "../types";
+import { serverURL } from "../constants";
+import { LoginResponse, RegisterResponse, TypicalMessageResponse, User } from "../types";
 
 export const callRegister = async (user: User): Promise<RegisterResponse> => {
     const data = await fetch(serverURL + '/api/user/register', {
@@ -31,9 +31,21 @@ export const callLogin = async (user: User): Promise<LoginResponse> => {
 }
 
 export const callMeRequest = async (): Promise<User | null> => {
-    const data = await fetch(serverURL + '/api/user/me');
+    const data = await fetch(serverURL + '/api/user/me', {
+        credentials: "include"
+    });
     if (data.status === 401) {
         return null;
     }
     return data.json();
+}
+
+export const callLogout = async (): Promise<TypicalMessageResponse | null> => {
+    const response = await fetch(serverURL + '/api/user/logout', {
+        credentials: "include"
+    });
+    if (response.status === 200) {
+        return response.json();
+    }
+    return null;
 }
