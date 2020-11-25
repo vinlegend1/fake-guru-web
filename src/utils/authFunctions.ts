@@ -4,8 +4,8 @@ import { LoginResponse, RegisterResponse, User } from "../types";
 export const callRegister = async (user: User): Promise<RegisterResponse> => {
     const data = await fetch(serverURL + '/api/user/register', {
         method: 'POST',
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -20,13 +20,10 @@ export const callRegister = async (user: User): Promise<RegisterResponse> => {
 export const callLogin = async (user: User): Promise<LoginResponse> => {
     const data = await fetch(serverURL + '/api/user/login', {
         method: 'POST',
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
         headers: {
             'Content-Type': 'application/json'
         },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
+        credentials: "include",
         body: JSON.stringify(user)
     });
 

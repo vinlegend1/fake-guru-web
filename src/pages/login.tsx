@@ -1,31 +1,35 @@
 import { Box, FormGroup, FormControl, InputLabel, Input, FormHelperText, Button } from '@material-ui/core'
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
-import { User } from 'src/types';
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../context/authContext';
+import { User } from '../types';
 import { callLogin } from '../utils/authFunctions';
 
 const Login = () => {
+    const { setIsAuthenticated, setUser } = useContext(AuthContext);
     const router = useRouter();
-    const [_user, setUser] = useState<User>({
+    const [_user, set_user] = useState<User>({
         username: "",
         password: ""
     });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // console.log('hihih')
         const { isAuthenticated, user } = await callLogin(_user);
 
         if (!isAuthenticated) {
             return;
         }
         console.log(user);
-        // router.push('/home');
+        setIsAuthenticated!(true);
+        setUser!(user);
+
+        router.push('/home');
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         e.preventDefault();
-        setUser({
+        set_user({
             ..._user,
             [e.target.name]: e.target.value
         });
