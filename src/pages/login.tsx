@@ -2,7 +2,7 @@ import { Box, FormGroup, FormControl, InputLabel, Input, FormHelperText, Button 
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../context/authContext';
-import { User } from '../types';
+import { TypicalMessageResponse, User } from '../types';
 import { callLogin } from '../utils/authFunctions';
 
 const Login = () => {
@@ -12,12 +12,20 @@ const Login = () => {
         username: "",
         password: ""
     });
+    const [message, setMessage] = useState<TypicalMessageResponse>({
+        error: false,
+        msgBody: ""
+    });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { isAuthenticated, user } = await callLogin(_user);
 
         if (!isAuthenticated) {
+            setMessage({
+                error: true,
+                msgBody: "username or password incorrect"
+            });
             return;
         }
         console.log(user);
@@ -52,6 +60,12 @@ const Login = () => {
                     <Button type="submit" color="secondary" variant="contained">Login</Button>
                 </FormGroup>
             </form>
+            {message.error ?
+                <Box style={{ color: "#ef5350" }} mt={2} >
+                    {message.msgBody}
+                </Box>
+                : null
+            }
         </Box>
     )
 }

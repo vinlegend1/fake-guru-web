@@ -7,7 +7,7 @@ export interface User {
 
 export interface TypicalMessageResponse {
     msgBody: string;
-    error: true;
+    error: boolean;
 }
 
 export interface SuccessRegisterResponse {
@@ -19,7 +19,7 @@ export type RegisterResponse = TypicalMessageResponse | SuccessRegisterResponse;
 
 export interface LoginResponse {
     isAuthenticated: boolean;
-    user: User;
+    user: User | null;
 }
 
 export interface AuthContextType {

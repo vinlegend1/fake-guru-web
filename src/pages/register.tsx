@@ -1,13 +1,16 @@
 import { FormControl, InputLabel, Input, FormHelperText, Box, FormGroup, Button } from '@material-ui/core'
 import React, { useState } from 'react'
 import { callRegister } from '../utils/authFunctions';
-import { User } from '../types';
+import { TypicalMessageResponse, User } from '../types';
 import { useRouter } from 'next/router';
 
 const Register = () => {
 
     const router = useRouter();
-
+    const [message, setMessage] = useState<TypicalMessageResponse>({
+        error: false,
+        msgBody: ""
+    });
     const [user, setUser] = useState<User>({
         username: "",
         password: "",
@@ -20,12 +23,12 @@ const Register = () => {
         // console.log('hihih')
         const { msgBody, email, error, username } = await callRegister(user) as any;
 
-        if (error) {
+        if (error || msgBody) {
             console.log(error);
-            return
-        }
-        if (msgBody) {
-            console.log(msgBody);
+            setMessage({
+                error: true,
+                msgBody: "username or email already taken"
+            });
             return;
         }
         console.log(email, username)
@@ -64,6 +67,12 @@ const Register = () => {
                     <Button type="submit" color="secondary" variant="contained">Register</Button>
                 </FormGroup>
             </form>
+            {message.error ?
+                <Box style={{ color: "#ef5350" }} mt={2} >
+                    {message.msgBody}
+                </Box>
+                : null
+            }
         </Box>
     )
 }

@@ -27,6 +27,13 @@ export const callLogin = async (user: User): Promise<LoginResponse> => {
         body: JSON.stringify(user)
     });
 
+    if (data.status !== 200) {
+        return {
+            isAuthenticated: false,
+            user: null
+        }
+    }
+
     return data.json();
 }
 
