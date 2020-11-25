@@ -1,1 +1,1 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+Web UI for a project to keep scammers off the face of the earth.
