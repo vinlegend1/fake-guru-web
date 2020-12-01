@@ -1,9 +1,10 @@
-import { Box, Button, ButtonGroup, Hidden } from '@material-ui/core'
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router';
 import { AuthContext } from '../context/authContext';
 import { callLogout } from '../utils/authFunctions';
 import { TypicalMessageResponse } from '../types';
+import UnAuthNavbar from './navbarComponents/UnAuthNavbar';
+import AuthNavbar from './navbarComponents/AuthNavbar';
 
 const Navbar: React.FC<any> = () => {
     const router = useRouter()
@@ -26,43 +27,8 @@ const Navbar: React.FC<any> = () => {
     return (
         <>
             { !isAuthenticated ?
-                <>
-                    <Hidden xsDown>
-                        <Box display="flex" alignItems="center" bgcolor="text.secondary" px={5}>
-                            <Box mr="auto"><h3>Fake Guru</h3></Box>
-                            <Box>fwhoih</Box>
-                            <Box ml="auto">
-                                <ButtonGroup aria-label="Login or Register" size="small" variant="contained">
-                                    <Button color="primary" onClick={e => handleClick(e, "login")}>Login</Button>
-                                    <Button color="secondary" onClick={e => handleClick(e, "register")} > Register</Button>
-                                </ButtonGroup>
-                            </Box>
-                        </Box>
-                    </Hidden>
-                    <Hidden smUp>
-                        <Box display="flex" alignItems="center">
-                            Navbar
-                </Box>
-                    </Hidden>
-                </>
-                :
-                <>
-                    <Hidden xsDown>
-                        <Box display="flex" alignItems="center" bgcolor="text.secondary" px={5}>
-                            <Box mr="auto"><h3>Fake Guru</h3></Box>
-                            <Box ml="auto">
-                                <ButtonGroup aria-label="Login or Register" size="small" variant="contained">
-                                    <Button color="secondary" onClick={e => handleClick(e, "logout")} > Logout</Button>
-                                </ButtonGroup>
-                            </Box>
-                        </Box>
-                    </Hidden>
-                    <Hidden smUp>
-                        <Box display="flex" alignItems="center">
-                            Navbar
-                </Box>
-                    </Hidden>
-                </>
+                <UnAuthNavbar handleClick={handleClick} /> :
+                <AuthNavbar handleClick={handleClick} />
             }
         </>
     )

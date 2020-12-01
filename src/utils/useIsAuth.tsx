@@ -4,6 +4,7 @@ import { callMeRequest } from "./authFunctions";
 
 export const useIsAuth = async () => {
     const isAuth = await callMeRequest();
+    console.log(isAuth);
     const router = useRouter();
     if (!isAuth) {
         router.replace("/login");

@@ -49,12 +49,12 @@ const Login = () => {
                 <FormGroup color="#007bb2">
                     <FormControl>
                         <InputLabel htmlFor="username">Username</InputLabel>
-                        <Input onChange={handleChange} name="username" id="username" aria-describedby="username-helper" type="text" />
+                        <Input required onChange={handleChange} name="username" id="username" aria-describedby="username-helper" type="text" />
                         <FormHelperText id="username-helper">Enter username</FormHelperText>
                     </FormControl>
                     <FormControl>
                         <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input onChange={handleChange} name="password" id="password" aria-describedby="password-helper" type="password" />
+                        <Input required onChange={handleChange} name="password" id="password" aria-describedby="password-helper" type="password" />
                         <FormHelperText id="password-helper">Enter your password</FormHelperText>
                     </FormControl>
                     <Button type="submit" color="secondary" variant="contained">Login</Button>
