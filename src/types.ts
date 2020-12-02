@@ -28,3 +28,14 @@ export interface AuthContextType {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>> | null;
 }
+
+export interface GetPostType {
+    postId: number;
+    title: string;
+    body: string;
+    createdAt: Date;
+    boardId: number;
+    boardName: string;
+    creatorId: number;
+    username: string;
+}
